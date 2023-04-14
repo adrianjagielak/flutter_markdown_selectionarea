@@ -1,3 +1,7 @@
+## 0.6.14+1
+
+* Added support for `SelectionArea`.
+
 ## 0.6.14
 
 * Require `markdown: ^7.0.0`
