@@ -1,10 +1,8 @@
 name: flutter_markdown_selectionarea
-description: A Markdown renderer for Flutter. Create rich text output,
-  including text styles, tables, links, and more, from plain text data
-  formatted with simple Markdown tags.
+description: A fork of flutter_markdown package with added support for SelectionArea.
 repository: https://github.com/adrianjagielak/flutter_markdown_selectionarea
 issue_tracker: https://github.com/adrianjagielak/flutter_markdown_selectionarea/issues
-version: 0.6.14+2
+version: 0.6.14+3
 
 environment:
   sdk: ">=2.12.0 <3.0.0"

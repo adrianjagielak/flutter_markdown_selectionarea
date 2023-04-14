@@ -1,3 +1,7 @@
+## 0.6.14+3
+
+* Changed package description.
+
 ## 0.6.14+2
 
 * Fixed merging inline children.
