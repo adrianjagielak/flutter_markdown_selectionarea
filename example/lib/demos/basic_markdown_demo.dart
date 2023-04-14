@@ -4,7 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:flutter_markdown_selectionarea/flutter_markdown.dart';
 
 import '../shared/dropdown_menu.dart' as dropdown;
 import '../shared/markdown_demo_widget.dart';
