@@ -1,3 +1,7 @@
+## 0.6.14+2
+
+* Fixed merging inline children.
+
 ## 0.6.14+1
 
 * Added support for `SelectionArea`.
