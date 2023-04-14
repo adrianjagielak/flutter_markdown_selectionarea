@@ -94,7 +94,8 @@ class MarkdownBuilder implements md.NodeVisitor {
   /// Creates an object that builds a [Widget] tree from parsed Markdown.
   MarkdownBuilder({
     required this.delegate,
-    required this.selectable,
+    @Deprecated(
+        'To make markdown text selectable wrap it in SelectionArea') required this.selectable,
     required this.styleSheet,
     required this.imageDirectory,
     required this.imageBuilder,
@@ -114,6 +115,7 @@ class MarkdownBuilder implements md.NodeVisitor {
   /// If true, the text is selectable.
   ///
   /// Defaults to false.
+  @Deprecated('To make markdown text selectable wrap it in SelectionArea')
   final bool selectable;
 
   /// Defines which [TextStyle] objects to use for each type of element.
@@ -822,22 +824,12 @@ class MarkdownBuilder implements md.NodeVisitor {
   Widget _buildRichText(TextSpan? text, {TextAlign? textAlign, String? key}) {
     //Adding a unique key prevents the problem of using the same link handler for text spans with the same text
     final Key k = key == null ? UniqueKey() : Key(key);
-    if (selectable) {
-      return SelectableText.rich(
-        text!,
-        textScaleFactor: styleSheet.textScaleFactor,
-        textAlign: textAlign ?? TextAlign.start,
-        onTap: onTapText,
-        key: k,
-      );
-    } else {
-      return Text.rich(
-        text!,
-        textScaleFactor: styleSheet.textScaleFactor!,
-        textAlign: textAlign ?? TextAlign.start,
-        key: k,
-      );
-    }
+    return Text.rich(
+      text!,
+      textScaleFactor: styleSheet.textScaleFactor!,
+      textAlign: textAlign ?? TextAlign.start,
+      key: k,
+    );
   }
 
   /// This allows a value of type T or T? to be treated as a value of type T?.
