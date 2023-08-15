@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use_from_same_package
+
 // Copyright 2013 The Flutter Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -101,6 +103,7 @@ class MarkdownBuilder implements md.NodeVisitor {
   /// Creates an object that builds a [Widget] tree from parsed Markdown.
   MarkdownBuilder({
     required this.delegate,
+    @Deprecated('To make markdown text selectable wrap it in SelectionArea')
     required this.selectable,
     required this.styleSheet,
     required this.imageDirectory,
@@ -121,6 +124,7 @@ class MarkdownBuilder implements md.NodeVisitor {
   /// If true, the text is selectable.
   ///
   /// Defaults to false.
+  @Deprecated('To make markdown text selectable wrap it in SelectionArea')
   final bool selectable;
 
   /// Defines which [TextStyle] objects to use for each type of element.
@@ -691,11 +695,9 @@ class MarkdownBuilder implements md.NodeVisitor {
   ) {
     final List<Widget> mergedTexts = <Widget>[];
     for (final Widget child in children) {
-      if (mergedTexts.isNotEmpty &&
-          mergedTexts.last is RichText &&
-          child is RichText) {
-        final RichText previous = mergedTexts.removeLast() as RichText;
-        final TextSpan previousTextSpan = previous.text as TextSpan;
+      if (mergedTexts.isNotEmpty && mergedTexts.last is Text && child is Text) {
+        final Text previous = mergedTexts.removeLast() as Text;
+        final TextSpan previousTextSpan = previous.textSpan! as TextSpan;
         final List<TextSpan> children = previousTextSpan.children != null
             ? previousTextSpan.children!
                 .map((InlineSpan span) => span is! TextSpan
@@ -703,7 +705,7 @@ class MarkdownBuilder implements md.NodeVisitor {
                     : span)
                 .toList()
             : <TextSpan>[previousTextSpan];
-        children.add(child.text as TextSpan);
+        children.add(child.textSpan! as TextSpan);
         final TextSpan? mergedSpan = _mergeSimilarTextSpans(children);
         mergedTexts.add(_buildRichText(
           mergedSpan,
@@ -840,24 +842,13 @@ class MarkdownBuilder implements md.NodeVisitor {
   Widget _buildRichText(TextSpan? text, {TextAlign? textAlign, String? key}) {
     //Adding a unique key prevents the problem of using the same link handler for text spans with the same text
     final Key k = key == null ? UniqueKey() : Key(key);
-    if (selectable) {
-      return SelectableText.rich(
-        text!,
-        // ignore: deprecated_member_use
-        textScaleFactor: styleSheet.textScaleFactor,
-        textAlign: textAlign ?? TextAlign.start,
-        onTap: onTapText,
-        key: k,
-      );
-    } else {
-      return RichText(
-        text: text!,
-        // ignore: deprecated_member_use
-        textScaleFactor: styleSheet.textScaleFactor!,
-        textAlign: textAlign ?? TextAlign.start,
-        key: k,
-      );
-    }
+    return Text.rich(
+      text!,
+      // ignore: deprecated_member_use
+      textScaleFactor: styleSheet.textScaleFactor!,
+      textAlign: textAlign ?? TextAlign.start,
+      key: k,
+    );
   }
 
   /// This allows a value of type T or T? to be treated as a value of type T?.

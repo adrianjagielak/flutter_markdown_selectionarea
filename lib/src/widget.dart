@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use_from_same_package
+
 // Copyright 2013 The Flutter Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -169,6 +171,7 @@ abstract class MarkdownWidget extends StatefulWidget {
   const MarkdownWidget({
     super.key,
     required this.data,
+    @Deprecated('To make markdown text selectable wrap it in SelectionArea')
     this.selectable = false,
     this.styleSheet,
     this.styleSheetTheme = MarkdownStyleSheetBaseTheme.material,
@@ -196,6 +199,7 @@ abstract class MarkdownWidget extends StatefulWidget {
   /// If true, the text is selectable.
   ///
   /// Defaults to false.
+  @Deprecated('To make markdown text selectable wrap it in SelectionArea')
   final bool selectable;
 
   /// The styles to use when displaying the Markdown.
@@ -411,6 +415,7 @@ class MarkdownBody extends MarkdownWidget {
   const MarkdownBody({
     super.key,
     required super.data,
+    @Deprecated('To make markdown text selectable wrap it in SelectionArea')
     super.selectable,
     super.styleSheet,
     // TODO(stuartmorgan): Remove this once 3.0 is no longer part of the
@@ -468,6 +473,7 @@ class Markdown extends MarkdownWidget {
   const Markdown({
     super.key,
     required super.data,
+    @Deprecated('To make markdown text selectable wrap it in SelectionArea')
     super.selectable,
     super.styleSheet,
     // TODO(stuartmorgan): Remove this once 3.0 is no longer part of the
